@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <title>Top des régions Vertes</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script><!--Pour l'utilisation de Charts.js-->
+        <script src="https://www.chartjs.org/samples/latest/utils.js"></script><!--Utilitaire pour les couleurs etc...-->
+        <link rel="stylesheet" type="text/css" href="style/styleV2.css" />
+    </head>
+	<body>
+        <div id="site">
+            <div id="banner1">
+                <img class="image_Logo" src="img/logo" />
+            </div> <!--Gestion de l'entete-->
+            <nav>
+                <ul>
+                    <li class="menu-accueil"><a href="index.html">Accueil</a></li>
+                    <li class="menu-graphiques">
+                        <a href"#">Graphiques</a>
+                        <ul class="submenu">
+                            <li><a href="graphiques-sol.html">Production Solaire</a></li>
+                            <li><a href="graphiques-eol.html">Production Eolienne</a></li>
+                            <li><a href="graphiques-tem.html">Consommation Température</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-stats">
+                        <a href"#">Stats</a>
+                        <ul class="submenu">
+                            <li><a href="stats-extremes.html">Les extremes</a></li>
+                            <li><a href="top-region.html">Le Top des regions Vertes</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-synthese"><a href="synthese.html">Synthese</a></li>
+                </ul>
+            </nav> <!--Gestion du menu-->
+            <div id="banner2">
+
+
+
+            </div><!--Gestion du baner2 non utilisé-->
+
+            <div id="contenuprincipal">
+                <canvas id="myChart"></canvas><!--appel du graphique, configuré et geré dans la partie script-->
+                <p style="font-size:large; font-style:italic">
+                    Cette courbe nous montre le lien existant entre la production solaire instantannée en GW avec la rayonnement global en france métropolitaine.
+                    Ces données issues d'un jeu traitant le mois de juillet 2019 nous permet de visualisé la parfaite synergie existantes entre les deux composants.
+                </p>
+            </div>
+
+            <script>
+                var ajax = new XMLHttpRequest();
+                var ajax2 = new XMLHttpRequest();// les 2 variables de requetes
+                var donnees;
+                var donnees2;// les 2 variables intermédiare pour le passage en JSON
+                var datatab = new Array();
+                var datatab2 = new Array();// les 2 tableaux qui seront utilisés comme donnée du graphique
+
+                ajax2.open("Get", "region.php", true);// appel de region.php qui contient la requete SQL qui renvois la totalité des regions trié
+                ajax2.send();
+                ajax.open("Get", "enr.php", true);// appel de enr.php qui contient la requete SQL qui renvois les valeurs en production enr par région
+                ajax.send();
+
+                ajax.onreadystatechange = function () {//Si une données de la base de données change ou qu'un appel de donées est fait alors les données se mettent a jours
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        donnees = JSON.parse(ajax.responseText);//passage du resultat de la requete en tableau format JSON
+                        for (var a = 0; a < donnees.length; a++) {
+                            datatab[a] = donnees[a].Production_totale;//Passage en un tableau d'entier 
+                        }
+
+                        donnees2 = JSON.parse(ajax2.responseText);//passage du resultat de la requete en tableau format JSON
+                        for (var b = 0; b < donnees2.length; b++) {
+                            datatab2[b] = donnees2[b].region;//Passage en un tableau de string
+                        }
+
+
+                        var barChartData = {//création d'une variable contenant les données de notre graphique
+                            labels: datatab2,//les données en abscisse seront le resultat de la requete ajax2 post traitement
+                            datasets: [{
+                            label: 'Production Energie renouvelable',
+                            backgroundColor: window.chartColors.green,
+                            borderColor: window.chartColors.red,
+                            borderWidth: 1,
+                            data: datatab//les données en abscisse seront le resultat de la requete ajax post traitement
+                            }]
+
+                        };
+
+                        var ctx = document.getElementById('myChart').getContext('2d');//création d'une variable contenant l'objet graphique que l'ont va afficher dans canvas et alimenter par les données de barChartData
+                        window.myBar = new Chart(ctx, {
+                        type: 'bar',
+                        data: barChartData,
+                        options: {
+                            responsive: true,
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Top des Regions Vertes'
+                            }
+                        }
+                    });             
+                    }
+                }                
+            </script>
+            <div id="footer">
+                <p>Emna Blaiech - Camille Chatelet - Guillaumme Foucourt | Tous droits réservés</p>
+            </div>
+        </div>
+	</body>
+</html>

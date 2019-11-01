@@ -1,0 +1,112 @@
+<html>
+<head>
+    <title>Synthese</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <link rel="stylesheet" type="text/css" href="style/styleV2.css" />
+</head>
+	<body>
+        <div id="site">
+            <div id="banner1">
+                <img class="image_Logo" src="img/logo" />
+            </div> <!--Gestion de l'entete-->
+            <nav>
+                <ul>
+                    <li class="menu-accueil"><a href="index.html">Accueil</a></li>
+                    <li class="menu-graphiques">
+                        <a href"#">Graphiques</a>
+                        <ul class="submenu">
+                            <li><a href="graphiques-sol.html">Production Solaire</a></li>
+                            <li><a href="graphiques-eol.html">Production Eolienne</a></li>
+                            <li><a href="graphiques-tem.html">Consommation Température</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-stats">
+                        <a href"#">Stats</a>
+                        <ul class="submenu">
+                            <li><a href="stats-extremes.html">Les extremes</a></li>
+                            <li><a href="top-region.html">Le Top des regions Vertes</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-synthese"><a href="synthese.html">Synthese</a></li>
+                </ul>
+            </nav> <!--Gestion du menu-->
+            <div id="banner2">
+
+
+
+            </div><!--Gestion du baner2 non utilisé-->
+
+            <div id="contenuprincipal">
+
+            <h1 style="color:#34a6a1">I- Introduction </h1>
+            <p>Dans un contexte où les données font partie intégrante de notre quotidien, il est important de prendre conscience des données auxquelles on peut avoir accès et comment les exploiter. C’est pour cela que nous allons étudier le concept d’’Open Data.</p>
+            <p>D’une part, les Open Data ou données ouvertes sont définis comme étant des données accessibles à tout le monde et libres de droit. Tout le monde peut utiliser et partager ces données. Trois critères déterminent ce qu’est l’Open Data : la disponibilité, la réutilisation et la distribution, puis la participation universelle. D’autre part, de nombreuses entreprises utilisent ces données afin de créer des avantages économiques, sociaux, environnementaux...</p>
+            <p>Afin de présenter ce qu’est l’Open Data, nous allons analyser la corrélation existante entre l’énergie et la météo. Nous allons accentuer, particulièrement, notre analyse sur les énergies renouvelables selon le rayonnement solaire et la vitesse du vent, et les régions produisant le plus d’énergies vertes. Pour cela, nous réaliserons une application ayant pour objectif d’informer le citoyen sur les éventuelles dépendances qui existent entre ces données.</p>
+            <h1 style="color:#34a6a1">II- L’analyse des données</h1>
+            <h2 style="margin-left:15px">1) Présentation des données</h2>
+            <h4 style="margin-left:30px">a) Les données énergétiques</h4>
+            <p>Nous avons décidé d’analyser ces données sur la période 2019 en France à partir de fichiers CSV afin de pouvoir intégrer les données dans une base de données et les exploiter sur un site web.</p>
+            <p>Nous avons pu trouver de nombreuses données pertinentes concernant l’énergie. En effet, dans ce domaine, nombre de données sont mises à dispositions au grand public de manière gratuite.</p>
+            <p>Tout d’abord, nous avons des données sur la production d’énergie. Puis, des données sur les énergies renouvelables que l’on peut mettre en lien avec les données sur le rayonnement solaire global et la vitesse du vent. Toutes ces données proviennent du site data.gouv.fr, mais également de Enedis et Réseaux Energies. Enedis fournit des données plus détaillées en terme de continuité de l’informations puisqu’il diffuse des données toutes les demi-heures, par exemple.</p>
+            <p>Lors de notre recherche sur les données énergétiques, nous avons pu remarquer un large panel de données gratuites disponibles sur différents sites. Ces données sont disponibles sous différents formats tels que sous formats CSV, JSON, GeoJSON et PDF, principalement. Par ailleurs, la licence appliquée à ces données est la Licence Ouverte version 2.0. Cette licence est caractérisée comme étant libre, ouverte et gratuite. De plus, elle favorise la réutilisation en autorisant la reproduction, la redistribution, l’adaptation et l’exploitation commerciale des données. Celle-ci encourage également la transparence des données et la qualité des sources en spécifiant la provenance de la donnée.</p>
+            <h4 style="margin-left:30px">b) Les données météorologiques </h4>
+            <p>Afin de donner un sens à notre analyse, nous avons choisi de corréler les données énergétique collectées à des informations réelles météorologiques. Pour cela, nous avons commencé par répertorier les données disponibles en ligne et en licence ouverte. Les données mises à disposition sur les sites météofrance, datagouv et infoclimat sont assez riches et en assez grand volume. Par contre certaines données sont accessibles contre une redevance et d’autres sont sur commande en ligne contre les coordonnées de l’usager. Les sources de ces données sont de type CSV, Excel et PDF. La particularité pour ce genre d’informations est leurs modèles assez complexes et pas instinctifs à prendre en main. </p>
+            <p>Pour ce qui est de notre exploitation de ces informations, nous avons été restreints par la catégorisation des informations par région et la non fiabilité des fichiers. Nous avons néanmoins extrait les températures, le rayonnement du soleil et la vitesse du vent.</p>
+            <h2 style="margin-left:15px">2) Les limites de ces données</h2>
+            <p>Les données météo sont disponibles mais pas accessibles. Un bon volume de données est disponible au public contre une redevance ce qui a représenté pour nous un frein dans la collecte des informations. Les indicateurs mis à dispositions ne sont pas évidents à comprendre, l’aspect technique de la donnée est assez présent ce qui relève du domaine de l’expertise et donc rend impossible son interprétation. Nous avons constaté pour les données relatives à la météo des fichiers de compte rendu d’observations, ce qui ne nous a pas paru utile dans le cadre de notre application. En regardant de plus près, la plupart des fichiers csv ne sont pas valides (colonnes manquantes et mal organisés). </p>
+            <p>Dans certains cas , l’abondance des données a représenté une difficulté pour notre analyse. En effet, nous avons été contraints de pré-traiter les données à extraire afin de les rendre utiles à notre analyse à l’aide d’un code.</p>
+            <p>Ce n’est pas parce que les données sont en ligne qu’elles sont accessibles ce qui rend leur exploitation difficiles, délicates. Les données sont de plus en plus accessibles mais pas à tout le monde. Beaucoup de compétences sont en effet nécessaires pour pouvoir les exploiter, ce qui n’est pas évident pour tout ses utilisateurs.</p>
+            <p>Nous avons constaté un manque de réactivité de la part des auteurs en leur proposant des corrections possibles. Par ailleurs, nous avons pu constater que malgré le grand nombre de données existantes du côté énergétique, la qualité des données, était, elle, critiquable puisqu’en les analysant nous nous sommes rendus compte, que certaines données étaient vides et, ainsi, non exploitables.</p>
+            <p>En conclusion, il est vrai que les données sont disponibles et que tout le monde peut en tirer bénéfice mais par forcément les comprendre, les analyser et correctement les interpréter. De plus, il faut être attentif à la qualité de ces données si nous voulons les rendres opérationnelles. </p>    
+            <h1 style="color:#34a6a1">III- Applications existantes et création d’une nouvelle application</h1>
+            <h2 style="margin-left:15px">1) Regard critique sur quelques applications existantes</h2>
+            <h4 style="margin-left:30px">a) Applications énergétiques</h4>
+            <p>Ils existent de nombreuses applications sur la thématique de l’énergie en se focalisant sur la consommation d’énergie et comment réduire celle-ci afin de devenir plus éco-responsable. D’autres applications sont plus axées sur la redistribution de l’informations, c’est-à-dire qu’elles ont une approche citoyenne de l’énergie, le but étant d’informer l’utilisateur et d’être dans une démarche de transparence de l’informations avec le citoyen. </p>
+            <p>Au vu des nombreuses applications existantes, celles-ci couvrent, selon nous, la totalité des besoins. En effet, une grande quantité de données sont mises à dispositions du grand public, ainsi, il est facile d’établir une application complète et détaillée. Comme nous avons pu le mentionner précédemment, nous pouvons trouver des applications tant bien sur la réduction de notre empreinte écologique en minimisant notre consommation énergétique, que sur la diffusion d’informations sous forme graphique.</p>
+            <p>Néanmoins, peu d’applications mettent en relation météo et énergie. De ce fait, nous trouvions cela intéressant de corréler ces deux types de données, notamment pour observer le lien de causalité entre la météo et les énergies renouvelables. </p>
+            <p>D’un point de vue fonctionnelle, les applications sous fluides et complètes. Ergonomiquement, les applications s’adaptent aux besoins de l’utilisateur. En effet, avec le nombres d’applications existantes, celles-ci recouvrent un large panels de besoins utilisateurs.</p>
+            <p>
+                Parmi ces applications, nous pouvons citer :
+                <ul>
+                    <li>ECO2mix (application RTE : informations sur l’électricité en France et par région)</li>
+                    <li>GRTgaz+ (application mis à disposition des personnes intéressées de comprendre et d’être informé en continu sur le transport du gaz naturel en France)</li>
+                    <li>TIGF 4U (application permettant d’accéder en temps réel aux données gazières publiques des infrastructures TIGF)</li>
+                    <li>Application web de la datalab des Pays de la Loire (application sur les filières électriques renouvelables)</li>
+                    <li>Sowee, Ecojoko (applications permettant de contrôler sa consommation d’énergie)</li>
+                    <li>HomeFriend (application permettant de maîtriser sa consommation d’eau et d’énergies afin de préserver la planète)</li>
+                </ul>
+            </p>
+            <h2 style="margin-left:15px">2) Notre application</h2>
+            <h4 style="margin-left:30px">a) Présentation de l’application</h4>
+            <p>Au sujet de notre application, elle vise plutôt à informer les citoyens sur les possibles dépendances existantes entre les données météorologiques et les données énergétiques. Nous avons voulu également mettre en avant les régions produisant le plus d’énergie verte.</p>
+            <p>Pour la réalisation de notre site web, nous avons développé en HTML/CSS, PHP, AJAX (permet de faire de la consultation de base de données de manière dynamique sans rafraichissement de la page) et JAVASCRIPT, pour la mise en forme de la page web et la création des graphiques. Afin de pouvoir émettre des données dans notre graphiques, nous avons exporter en CSV les données nous intéressants dans la base de données MySQL sous phpMyAdmin. Ainsi, nous pouvons requêter cette base de données et remplir nos graphiques.</p>
+            <p>Dans un premier temps, afin de traiter ces données, nous sommes partis sur une analyse graphique, en corrélant deux types de données : météorologiques et énergétiques. Ces données croisées sont représentés au niveau national sur la période de juillet 2019. En effet, nous voulions effectuer des graphiques avec des données récentes, puisqu’on en n’avait pas possibilité, puis sur le mois de juillet car nous nous sommes aperçu que les données étaient plus fiables sur ce mois-ci. </p>
+            <p>Dans un deuxième temps, nous avons dressé une série statistique sur la production d’énergie verte au niveau régional, s’appuyant sur des données annuelles.</p>
+            <p>Concernant la partie “graphique”, nous corrélons la production d’énergie solaire  en fonction du temps rayonnement. Puis, également, la production d’énergie éolienne en fonction du vent. De plus, nous allons examiner les extrêmes au niveau de la température. </p>
+            <p>Par ailleurs, concernant la partie “statistique”, au premier abord, nous voulions établir un classement des villes consommant le plus d’énergies vertes. Nous n’avions pas choisi de faire le classement des villes produisant le plus d’énergies verte car cela nous paraissait moins pertinent puisqu’une ville peut produire beaucoup d’énergies vertes mais peut ne pas en consommer autant et donc devient profitable à d’autres villes. Cela fausses alors les résultats. Il s’agit d’énergies non contrôlables. Malheureusement, la qualité des données concernant la consommation des villes n’était pas optimale. Effectivement, certaines données étant nulles, cela nous empêchait de les exploiter (l’exportation du fichier CSV dans la base de données échouait). Par conséquence, nous avons décidé de ressortir la production d’énergie verte par régions. Puis, nous avons réalisé un podium des trois régions ayant produit le plus d’énergie verte. </p>
+            <p>Enfin, nous aurons un onglet sur le site web regroupant les informations clés de nos graphiques et statistiques.</p>
+            <h4 style="margin-left:30px">b) Analyse des données obtenues</h4>
+            <p>L’évolution de la production d’énergie via les panneaux solaires en fonction du rayonnement est parfaitement corrélée dans le temps. Ceci montre le bon usage de ces dispositifs et leur capacités de stockage/production assez développé mais pas illimité. Nous pouvons voir ça sur la période du 22/7 au 26/7 où la quantité d'énergie provenant de la production solaire ne suit pas en valeur le rayonnement</p>
+            <p>L’évolution de la production d’énergie via les panneaux solaires en fonction du rayonnement est parfaitement corrélée dans le temps. Ceci montre le bon usage de ces dispositifs et leur capacités de stockage/production assez développé mais pas illimité. Nous pouvons voir ça sur la période du 22/7 au 26/7 où la quantité d'énergie provenant de la production solaire ne suit pas en valeur le rayonnement</p>
+            <h1 style="color:#34a6a1">IV- Conclusion </h1>
+            <p>Pour conclure, les données énergétiques en open source sont fructueuses par rapport aux données météorologiques. Cependant, ce n’est pas parce que nous avons à notre disposition nombre de données que celles-ci sont qualitatives et facile à comprendre et à interpréter. Nous pouvons ainsi dire, que le concept d’Open Data à ses propres limites, pouvant freiner l’exploitation de ses données. Celles-ci sont accessibles mais il faut les connaissances et les compétences nécessaires pour les comprendre. De surcroît, nous observons également un retard de la part de certaines entreprises à diffuser de l’information gratuitement, comme nous avons pu le constater lors de nos recherches sur les données météorologiques. Ces dernières, sont soient, majoritairement payantes, soit elles sont disponibles gratuitement mais les fichiers de données sont non exploitables, défaillants. Enfin, ces données mises à dispositions librement permettent d’avoir une information en continue et de favoriser la transparence envers les citoyens. </p>
+            <h1 style="color:#34a6a1">V- Webographie</h1>
+            <ul>
+                <li>https://www.lebigdata.fr/open-data-definition</li>
+                <li>https://www.europeandataportal.eu/elearning/fr/module1/#/id/co-01</li>
+                <li>http://www.sts-services.fr/les-applications-mobile-pour-gerer-lenergie-de-sa-maison/</li>
+                <li>https://www.fournisseur-energie.com/application-consommation-energie/</li>
+                <li>https://opendata.reseaux-energies.fr/explore/dataset/eco2mix-national-cons-def/information/?disjunctive.nature</li>
+                <li>https://data.enedis.fr/explore/dataset/bilan-electrique-demi-heure/table/?sort=horodate</li>
+            </ul>
+
+
+</div><!--Contenu principal de la page-->
+
+            <div id="footer">
+                <p>Emna Blaiech - Camille Chatelet - Guillaumme Foucourt | Tous droits réservés</p>
+            </div>
+        </div>
+	</body>
+</html>
